@@ -1,3 +1,6 @@
+/* Font Roboto */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 /* Reset */
 * {
     margin: 0;
@@ -5,4 +8,210 @@
     box-sizing: border-box;
     list-style: none;
     text-decoration: none;
+    font-family: "Roboto", sans-serif;
+}
+
+:root {
+    --primary: #1E40AF;
+    --background: #DFDFDF;
+    --background-card: #007C53;
+    --text-color: #FFFFFF;
+    --second-text-color: #000000;
+}
+
+/* Header */
+header {
+    background-color: var(--primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-flow: row nowrap;
+    padding: 20px 25px;
+    width: 100%;
+    height: 70px;
+}
+
+.header-title > h1 {
+    font-size: 24px;
+    font-weight: bolder;    
+    color: var(--text-color);
+}
+
+/* Navigation */
+.area-menu > img {
+    width: 40px;
+    height: 40px;
+}
+
+.navigation {
+    display: none;
+}
+
+/* Main */
+main {
+    background-color: var(--background);
+    width: 100%;
+    padding: 20px 25px;
+}
+
+.content-text > h2, h3, p {
+    text-align: justify;
+    margin-bottom: 8px;
+}
+
+.content-text > h2 {
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+.content-text > h3 {
+    font-size: 14px;
+    font-weight: bolder;
+    margin-bottom: 13px;
+}
+
+.content-text > p {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Content image */
+.content-image > figure img {
+    display: none;
+}
+
+hr {
+    margin: 20px 0;
+}
+
+/* Services */
+.services-title {
+    margin-bottom: 30px;
+}
+
+.services-title > h2 {
+    font-size: 24px;
+    font-weight: bolder;
+}
+
+/* Cards */
+.area-cards {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-around;
+    gap: 40px;
+}
+
+.card {
+    width: 291px;
+    height: 260px;
+    background-color: var(--background-card);
+}
+
+.card-image {
+    padding: 0;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.card-image > img {
+    width: 292px;
+    height: 170px;
+}
+
+.card-content > .card-title {
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.card-content > .card-text {
+    font-size: 12px;
+    font-weight: 400;
+    margin-left: 10px;
+}
+
+/* Footer */
+.first-footer {
+    background-color: #909090;
+    height: 130px;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 10px;
+    padding: 10px;
+}
+
+.footer-title > h3 {
+    font-size: 13px;
+    font-weight: bolder;
+    color: var(--text-color);
+    margin: 10px 0;
+}
+
+.area-footer-navigation {
+    display: flex;
+    gap: 13px;
+}
+
+.footer-navigation {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 4px;
+}
+
+.footer-navigation-title > h4 {
+    font-size: 13px;
+    font-weight: bolder;
+    text-transform: capitalize;
+}
+
+.footer-navigation-links {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 4px;
+}
+
+.footer-navigation-links > a {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-color);
+    text-transform: capitalize;
+}
+
+.area-contact {
+    align-self: center;
+    flex: 1;
+    margin-top: 10px;
+}
+
+.icons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.icon > a > img {
+    width: 20px;
+    height: 20px;
+}
+
+.btn-contact {
+    width: 100%;
+    height: 25px;
+    border-radius: 14px;
+    border: 1px solid #00000030;
+    background-color: salmon;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.second-footer {
+    background-color: #666666;
+    height: 20px;
+}
+
+.copy {
+    text-align: center;
+    font-size: 12px;
 }

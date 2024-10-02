@@ -42,7 +42,7 @@
                     <li><a href="/public/pages/todos.html">Todos</a></li>
                     <li><a href="/public/pages/pagar.html">Pagar</a></li>
                     <li><a href="/public/pages/contas.html">Contas</a></li>
-                    <li><a href="/public/pages/referencia.html">Referencia</a></li>
+                    <li><a href="/public/pages/relatorio.html">Relatório</a></li>
                 </ul>
             </section>
         </nav>
@@ -98,98 +98,118 @@
 
     <!-- Footer -->
     <footer>
-        <!-- Main footer -->
-        <section class="first-footer">
-            <!-- Footer Title -->
-            <section class="footer-title">
-                <h3>FinanControl</h3>
-            </section>
+        <div class="footer-content">
+            <div class="footer-contacts">
+                <!-- Title footer -->
+                <h1>FinanControl</h1>
 
-            <!-- Footer navigation -->
-            <section class="area-footer-navigation">
-                <!-- home -->
-                <div class="footer-navigation home">
-                    <!-- Title -->
-                    <div class="footer-navigation-title">
-                        <h4>Inicio</h4>
-                    </div>
-
-                    <!-- Link -->
-                    <div class="footer-navigation-links">
-                        <a href="/public/index.html">Home</a>
-                    </div>
-                </div>
-
-                <!-- Pages -->
-                <div class="footer-navigation pages">
-                    <div class="footer-navigation-title">
-                        <h4>Paginas</h4>
-                    </div>
-
-                    <div class="footer-navigation-links">
-                        <a href="/public/index.html">Home</a>
-                        <a href="/public/pages/todos.html">Todos</a>
-                        <a href="/public/pages/pagar.html">Pagar</a>
-                        <a href="/public/pages/contas.html">Contas</a>
-                        <a href="/public/pages/referencia.html">referencia</a>
-                    </div>
-                </div>
-
-                <!-- Sobre -->
-                <div class="footer-navigation sobre">
-                    <div class="footer-navigation-title">
-                        <h4>Sobre</h4>
-                    </div>
-
-                    <div class="footer-navigation-links">
-                        <a href="https://github.com/luiz0ph/finanControl">Documentação</a>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Contact -->
-            <section class="area-contact">
-                <!-- Icons -->
-                <div class="icons">
-                    <!-- Instagram icon -->
-                    <span class="instagram-icon">
-                        <a href="https://www.instagram.com/phelipe__2k24" target="_blank">
-                            <img src="/public/img/icons/instagram-icon.svg" alt="instagram icon">
-                        </a>
-                    </span>
-
-                    <!-- Github icon -->
-                    <span class="github-icon">
-                        <a href="https://github.com/luiz0ph" target="_blank">
-                            <img src="/public/img/icons/github-icon.svg" alt="github icon">
-                        </a>
-                    </span>
-                    
-                    <!-- linkedin icon -->
-                    <span class="linkedin-icon">
-                        <a href="#">
-                            <img src="/public/img/icons/linkedin-icon.svg" alt="linkedin icon">
-                        </a>
-                    </span>
-                </div>
-
-                <!-- Button cotact -->
-                <div class="email-contact">
-                    <a href="mailto:luizphsantana@gmail.com">
-                        <button class="btn-contact">Contato</button>
+                <!-- Icons social media -->
+                <div class="footer-social-media">
+                    <!-- Instagram -->
+                    <a href="https://www.instagram.com/phelipe__2k24" class="footer-link instagram" target="_blank">
+                        <img src="/public/img/icons/instagram-icon.svg" alt="instagram icon">
                     </a>
-                </div>
-            </section>
-        </section>
 
-        <!-- Copy -->
-        <section class="second-footer">
-            <p class="copy">
-                &copy; Copyright - <a href="https://github.com/luiz0ph">Luiz Phelipe</a>
-            </p>
-        </section>
+                    <!-- Github -->
+                    <a href="https://github.com/luiz0ph" class="footer-link github" target="_blank">
+                        <img src="/public/img/icons/github-icon.svg" alt="github icon">
+                    </a>
+
+                    <!-- Linkedin -->
+                    <a href="#" class="footer-link linkedin" target="_blank">
+                        <img src="/public/img/icons/linkedin-icon.svg" alt="linkedin icon">
+                    </a>
+
+                </div>
+            </div>
+
+            <ul class="footer-list">
+                <li>
+                    <h3>Páginas</h3>
+                </li>
+
+                <li>
+                    <a href="/public/index.html" class="footer-link">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/public/pages/todos.html" class="footer-link">
+                        Todos
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/public/pages/pagar.html" class="footer-link">
+                        Pagar
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/public/pages/contas.html" class="footer-link">
+                        contas
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/public/pages/relatorio.html" class="footer-link">
+                        Relatório
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="footer-list">
+                <li>
+                    <h3>Contatos</h3>
+                </li>
+
+                <li>
+                    <a href="mailto:luizphsantana@gmail.com" class="footer-link">
+                        Email
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.instagram.com/phelipe__2k24" class="footer-link" target="_blank">
+                        Instagram
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://github.com/luiz0ph" class="footer-link" target="_blank">
+                        Github
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="#" class="footer-link" target="_blank">
+                        Linkedin
+                    </a>
+                </li>
+            </ul>
+
+            <div class="footer-subscribe">
+                <h3>Subscribe</h3>
+
+                <p>
+                    Enter your e-mail to get notifed about our news solutions
+                </p>
+
+                <div class="input-group">
+                    <input type="email" id="email">
+                    <button>
+                        <i class="fa-regular fa-envelope"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="second-footer">
+            <p class="copy">&copy;Copyright - <a href="https://github.com/luiz0ph" target="_blank">Luiz Phelipe</a></p>
+        </div>
     </footer>
-    
+
     <script defer src="/public/dist/index.js"></script>
 </body>
 </html>

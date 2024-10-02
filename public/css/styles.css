@@ -81,6 +81,11 @@ main {
     display: none;
 }
 
+.content-image > figure img {
+    box-shadow: 1px 1px 10px #00000060;
+    height: max-content;
+}
+
 hr {
     margin: 20px 0;
 }
@@ -113,10 +118,32 @@ hr {
     gap: 40px;
 }
 
+a.card-link {
+    color: #000000;
+}
+
 .card {
+    cursor: pointer;
     width: 291px;
     height: 260px;
     background-color: var(--background-card);
+    box-shadow: 1px 1px 10px #00000060;
+    transition: 0.3s all ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.15);
+    transition: 0.3s all ease-in-out;
+}
+
+.card-title > h3 {
+    transition: 0.3s all ease-in-out;
+}
+
+.card:hover .card-title > h3 {
+    font-size: 22px;
+    color: #F97316;
+    transition: 0.3s all ease-in-out;
 }
 
 .card-image {
@@ -271,7 +298,6 @@ footer {
 
     .content-image > figure img {
         width: 100%;
-        height: 200px;
     }
 
     .footer-content {
@@ -399,7 +425,6 @@ footer {
 
     .content-image > figure img {
         width: 40vw;
-        height: 50vh;
     }
 
     .services-title > h2 {

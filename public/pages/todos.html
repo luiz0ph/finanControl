@@ -17,6 +17,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!-- Slick -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!-- Google Chart -->
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
 
     <title>FinanControl</title>
 </head>
@@ -57,7 +61,7 @@
                 <div class="dashboard-content">
                     <!-- Title -->
                     <span class="dashboard-content-title to-pay">
-                        <p>Total à pagar: </p>
+                        <p>Total a Pagar: </p>
                     </span>
 
                     <!-- Value -->
@@ -118,12 +122,12 @@
 
             <!-- Section title -->
             <div class="section-title">
-                <h2>Contas à Pagar</h2>
+                <h2>Contas a Pagar</h2>
             </div>
 
             <!-- Table -->
             <div class="table-area">
-                <table>
+                <table class="pay">
                     <tr class="table-title-row">
                         <!-- Type -->
                         <th>
@@ -137,7 +141,7 @@
 
                         <!-- Due date -->
                         <th>
-                            Vencimento
+                            Venc
                         </th>
 
                         <!-- Installments -->
@@ -157,7 +161,7 @@
         <hr>
 
         <!-- All accounts -->
-        <section>
+        <section class="area accounts">
             <!-- Section title -->
             <div class="section-title">
                 <h2>Todas as Contas</h2>
@@ -165,7 +169,7 @@
 
             <!-- Table -->
             <div class="table-area">
-                <table>
+                <table class="account">
                     <tr class="table-title-row">
                         <!-- Type -->
                         <th>
@@ -179,7 +183,7 @@
 
                         <!-- Due date -->
                         <th>
-                            Vencimento
+                            Venc
                         </th>
 
                         <!-- Installments -->
@@ -194,7 +198,7 @@
 
                         <!-- Edit -->
                         <th>
-                            Editar
+                            Edit
                         </th>
                     </tr>
                 </table>
@@ -205,7 +209,9 @@
 
         <!-- Chart -->
         <section>
-            <!-- Grafico -->
+            <div id="myChart" style="max-width:700px; height:400px">
+                <!-- Chart -->
+            </div>
         </section>
     </main>
 

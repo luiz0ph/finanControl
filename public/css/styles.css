@@ -281,6 +281,107 @@ footer {
     transition: 0.8s all ease-in-out;
 }
 
+/* Other pages */
+.area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column nowrap;
+}
+.dashboard {
+    width: 80vw;
+    max-width: 620px;
+    height: 30vh;
+    max-height: 200px;
+    background-color: var(--text-color);
+    box-shadow: 1px 1px 10px #00000040;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+}
+
+.dashboard-content {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row nowrap;
+}
+
+.to-pay {
+    color: #ff0000;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.earned {
+    color: #00ff00;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.balance {
+    color: #0000ff;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.add-account-area {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: start;
+    align-items: start;
+    align-self: flex-start;
+    flex: 1;
+    gap: 5px;
+    margin: 30px 0;
+}
+
+.add-icon, .add-label {
+    cursor: pointer;
+}
+
+.add-account-area > .add-icon img {
+    width: 25px;
+    height: 25px;
+}
+
+.add-account-area > .add-label p {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.table-area table {
+    border-collapse: collapse;
+    border: 1px solid #000;
+    margin-top: 20px;
+    width: 90vw;
+    box-shadow: 1px 1px 10px #00000050;
+    margin: 30px 0;
+}
+
+th {
+    background-color: var(--primary);
+}
+
+td {
+    background-color: var(--primary);
+}
+
+.pay th, td {
+    border: 1.5px solid #000;
+    padding: 10px;
+    font-size: 0.80rem;
+    font-weight: bolder;
+}
+
+.account th, td {
+    border: 1px solid #000;
+    padding: 5px;
+    font-size: 0.80rem;
+    font-weight: bolder;
+}
+
 @media (min-width: 600px) {
     .content {
         display: flex;
@@ -302,6 +403,20 @@ footer {
 
     .footer-content {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .pay th, td {
+        border: 1.5px solid #000;
+        padding: 10px;
+        font-size: 1rem;
+        font-weight: bolder;
+    }
+    
+    .account th, td {
+        border: 1px solid #000;
+        padding: 10px;
+        font-size: 1rem;
+        font-weight: bolder;
     }
 }
 
@@ -335,6 +450,16 @@ footer {
         row-gap: 20px;
         padding: 20px;
         place-items: center;
+    }
+
+    .add-account-area > .add-icon img {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .add-account-area > .add-label p {
+        font-size: 1.3rem;
+        font-weight: bold;
     }
 
 }

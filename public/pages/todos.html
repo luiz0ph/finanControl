@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <!-- Google Chart -->
     <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- Mask input -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
     <title>FinanControl</title>
 </head>
@@ -55,39 +57,52 @@
     <!-- Main -->
     <main>
         <!-- Modal Config -->
-        <section class="modal modal-config">
-            <!-- Earnings per month -->
-            <div>
-                <label for="earnings">Ganhos por mês: </label>
-                <input 
-                type="text" 
-                name="earnings" 
-                id="earnings">
-            </div>
+        <section class="modal" id="modal-config">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <!-- Close modal -->
+                <span class="close" id="btn-close-config">&times;</span>
 
-            <!-- Salary date -->
-            <div>
-                <label for="salary-date">Data do Salário: </label>
-                <input 
-                type="text"
-                name="salary-date"
-                id="salary-date">
-            </div>
+                <!-- Earnings per month -->
+                <div>
+                    <label for="earnings">Ganhos por mês: </label>
+                    <input
+                    type="text"
+                    name="earnings"
+                    id="earnings"
+                    class="input-money">
+                </div>
+                <!-- Salary date -->
+                <div>
+                    <label for="salary-date">Data do Salário: </label>
+                    <input
+                    type="text"
+                    name="salary-date"
+                    id="salary-date"
+                    class="input-date"
+                    placeholder="__/__">
+                </div>
+                <!-- Current balance -->
+                <div>
+                    <label for="current-balance">Saldo Atual: </label>
+                    <input
+                    type="text"
+                    name="current-balance"
+                    id="current-balance"
+                    class="input-money">
+                </div>
 
-            <!-- Current balance -->
-            <div>
-                <label for="current-balance">Saldo Atual: </label>
-                <input 
-                type="text"
-                name="current-balance"
-                id="current-balance">
+                <div>
+                    <!-- Submit -->
+                    <button id="btn-submit-config">Enviar</button>
+                </div>
             </div>
         </section>
 
         <!-- Reference area -->
         <section class="area reference-1">
             <!-- Area config -->
-            <div class="config-area">
+            <div class="config-area" id="btn-config">
                 <!-- Config icon -->
                 <span class="config-icon">
                     <img src="/public/img/icons/config-icon.svg" alt="">

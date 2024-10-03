@@ -418,7 +418,85 @@ th {
     font-weight: bold;
 }
 
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: 100%;
+}
+
+.modal-content {
+    background-color: #f0f0f0;
+    margin: 15% auto;
+    padding: 1rem 1.5rem 3rem 1.5rem;
+    border: 1px solid #888;
+    width: 90%;
+    height: 70vh;
+    border-radius: 10px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-content > div {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.modal-content > div label {
+    font-size: 1.3rem;
+    font-weight: bold;
+    align-self: flex-start;
+}
+
+.modal-content > div input {
+    width: 100%;
+    outline: none;
+    padding: 10px 20px;
+    border-radius: 15px;
+    border: 1px solid #000;
+    font-size: 1.1rem;
+}
+
+/* Close btn */
+.close {
+    color: #aaa;
+    align-self: flex-end;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
 @media (min-width: 600px) {
+    .modal-content {
+        height: 85vh;
+    }
+
+    .modal-content > div {
+        width: 80%;
+    }
+
+    .modal-content > div label {
+        font-size: 1.5rem;
+    }
+
     .content {
         display: flex;
         justify-content: space-around;
@@ -473,6 +551,10 @@ th {
 
 @media (min-width: 700px) {
 
+    .modal-content > div {
+        width: 70%;
+    }
+
     .header-title > h1 {
         font-size: 30px;
     }
@@ -516,6 +598,14 @@ th {
 }
 
 @media (min-width: 950px) {
+    .modal-content {
+        width: 70%;
+    }
+
+    .modal-content > div {
+        width: 50%;
+    }
+
     header {
         height: 100px;
     }

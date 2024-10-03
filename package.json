@@ -16,8 +16,10 @@
   },
   "dependencies": {
     "@types/jquery": "^3.5.31",
+    "@types/jquery-mask-plugin": "^1.14.6",
     "@types/slick-carousel": "^1.6.40",
     "jquery": "^3.7.1",
+    "jquery-mask-plugin": "^1.14.16",
     "slick-carousel": "^1.8.1"
   }
 }

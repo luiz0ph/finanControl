@@ -14,7 +14,7 @@
 
 :root {
     --primary: #1E40AF;
-    --background: #DFDFDF;
+    --background: #aaa;
     --background-card: #007C53;
     --text-color: #FFFFFF;
     --second-text-color: #000000;
@@ -22,7 +22,7 @@
 
 /* Header */
 header {
-    background-color: var(--primary);
+    background-color: var(--background-card);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -55,9 +55,21 @@ main {
     padding: 20px 25px;
 }
 
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    background-color: #f0f0f0;
+    padding: 25px 10px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px #00000050;
+}
+
 .content-text > h2, h3, p {
     margin-bottom: 8px;
-}
+}   
 
 .content-text > h2 {
     font-size: 16px;
@@ -72,22 +84,25 @@ main {
 
 .content-text > p {
     text-align: justify;
-    font-size: 12px;
+    font-size: 1rem;
     font-weight: 500;
 }
 
 /* Content image */
 .content-image {
     display: none;
+    width: 50%;
 }
 
 .content-image > figure img {
     box-shadow: 1px 1px 10px #00000060;
     height: max-content;
+    border-radius: 10px;
 }
 
 hr {
     margin: 20px 0;
+    border-color: #888;
 }
 
 /* Services */
@@ -126,7 +141,7 @@ a.card-link {
     cursor: pointer;
     width: 291px;
     height: 260px;
-    background-color: var(--background-card);
+    background-color: #fff;
     box-shadow: 1px 1px 10px #00000060;
     transition: 0.3s all ease-in-out;
 }
@@ -142,7 +157,7 @@ a.card-link {
 
 .card:hover .card-title > h3 {
     font-size: 22px;
-    color: #F97316;
+    color: var(--background-card);
     transition: 0.3s all ease-in-out;
 }
 
@@ -361,11 +376,7 @@ footer {
 }
 
 th {
-    background-color: var(--primary);
-}
-
-td {
-    background-color: var(--primary);
+    background-color: var(--background-card);
 }
 
 .pay th, td {
@@ -382,10 +393,36 @@ td {
     font-weight: bolder;
 }
 
+.config-area {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: start;
+    align-items: start;
+    align-self: flex-start;
+    flex: 1;
+    gap: 5px;
+    margin: 30px 0;
+}
+
+.config-icon img {
+    width: 30px;
+    height: 30px;
+}
+
+.config-icon, .config-label {
+    cursor: pointer;
+}
+
+.config-area > .config-label p {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
 @media (min-width: 600px) {
     .content {
         display: flex;
-        gap: 30px;
+        justify-content: space-around;
+        margin-bottom: 5rem;
     }
 
     .content-text {
@@ -393,12 +430,26 @@ td {
     }
 
     .content-image {
-        display: block;
-        width: 50%;
+        display: flex;
+        align-items: center;
+        margin: 0 20px;
+    }
+
+    .content-image-1 {
+        justify-content: end;
+    }
+
+    .content-image-2 {
+        justify-content: start;
     }
 
     .content-image > figure img {
-        width: 100%;
+        width: 90%;
+    }
+
+    .content-text p {
+        line-height: 1.8rem;
+        font-size: 1.1rem;
     }
 
     .footer-content {
@@ -434,12 +485,12 @@ td {
         font-size: 16px;
     }
 
-    .content-text > p {
-        font-size: 14px;
-    }
-
     .services-area {
         align-items: center;
+    }
+
+    .services-title > h2 {
+        font-size: 2rem;
     }
 
     .area-cards {
@@ -520,11 +571,6 @@ td {
         padding: 40px;
     }
 
-    .content {
-        display: flex;
-        justify-content: space-between;
-    }
-
     .content-text {
         width: 40%;
     }
@@ -537,15 +583,8 @@ td {
         font-size: 23px;
     }
 
-    .content-text > p {
-        font-size: 17px;
-    }
-
     .content-image {
-        width: 60%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        margin: 0;
     }
 
     .content-image > figure img {
@@ -553,7 +592,7 @@ td {
     }
 
     .services-title > h2 {
-        font-size: 32px;
+        font-size: 2.5rem;
     }
 
     .services-area {
@@ -564,8 +603,8 @@ td {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(2, 1fr);
-        column-gap: 7rem;
-        row-gap: 50px;
+        column-gap: 12rem;
+        row-gap: 80px;
         padding: 20px;
         place-items: center;
     }

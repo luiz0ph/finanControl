@@ -516,6 +516,17 @@ td, th {
     transition: 0.4s all ease-in-out;
 }
 
+.btn-pay {
+    width: 100%; 
+    padding: 0.4rem 0;
+    border-radius: 8px;
+    background-color: var(--background-card);
+    color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+    border: 1px solid #000;
+}
+
 #btn-submit-config:hover {
     transform: scale(1.2);
     transition: 0.4s all ease-in-out;

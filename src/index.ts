@@ -23,7 +23,7 @@ $(document).ready(() => {
 
     interface Account {
         type:string 
-        value:number
+        value:string
         due:string // Due date
         installments:number
         paid:boolean
@@ -31,11 +31,11 @@ $(document).ready(() => {
 
     class account implements Account {
         type: string;
-        value: number;
+        value: string;
         due: string;
         installments: number;
         paid: boolean;
-        constructor(type: string, value: number, due: string, installments: number, paid: boolean) {
+        constructor(type: string, value: string, due: string, installments: number, paid: boolean) {
             this.type = type;
             this.value = value;
             this.due = due;
@@ -77,7 +77,7 @@ $(document).ready(() => {
         } else {
             // Values taken from the inputs
             const type = String($('#type').val());
-            const value = Number($('#value').val()); // Fix the error of value being null
+            const value = String($('#value').val());
             const venc = String($('#venc').val());
             const parcelas = Number($('#parcelas').val());
 
@@ -157,7 +157,7 @@ $(document).ready(() => {
                             <td>${saveAccounts[i].value}</td>
                             <td>${saveAccounts[i].due}</td>
                             <td>${saveAccounts[i].installments}</td>
-                            <td><button>Pagar</button></td>
+                            <td><button class="btn-pay" data-index="${i}">Pagar</button></td>
                         </tr>`);
                 }
             }
@@ -166,6 +166,21 @@ $(document).ready(() => {
             console.error('Nenhuma conta encontrada no localStorage.');
         }
     }
+
+    // Function to pay the account
+    $(document).on('click', '.btn-pay', function() { // Do not replace with an arrow function because it causes an error.
+        saveAccounts = JSON.parse(localStorage.getItem('accounts'));
+
+        // Get the stored data from the HTML tag.
+        const index = $(this).data('index');
+        // Access by the index retrieved from the HTML tag.
+        saveAccounts[index].paid = true; 
+
+        // Store locally and reload the table.
+        const accounts = JSON.stringify(saveAccounts, null, 2);
+        localStorage.setItem('accounts', accounts);
+        loadAccounts();
+    })
 
     // Mask input
     $('#venc').mask('00/00/0000')

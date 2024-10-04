@@ -70,17 +70,18 @@
                     type="text"
                     name="earnings"
                     id="earnings"
-                    class="input-money">
+                    class="input-money"
+                    autocomplete="off">
                 </div>
                 <!-- Salary date -->
                 <div>
-                    <label for="salary-date">Data do Salário: </label>
+                    <label for="salary-date">Dia do Salário: </label>
                     <input
                     type="text"
                     name="salary-date"
                     id="salary-date"
                     class="input-date"
-                    placeholder="__/__">
+                    autocomplete="off">
                 </div>
                 <!-- Current balance -->
                 <div>
@@ -89,12 +90,13 @@
                     type="text"
                     name="current-balance"
                     id="current-balance"
-                    class="input-money">
+                    class="input-money"
+                    autocomplete="off">
                 </div>
 
                 <div>
                     <!-- Submit -->
-                    <button id="btn-submit-config">Enviar</button>
+                    <button class="btn-submit" id="btn-submit-config">Enviar</button>
                 </div>
             </div>
         </section>
@@ -156,14 +158,70 @@
 
         <hr>
 
-        <!-- 
-         !
-         Adicionar o modal, não esquecer
-         !
-        -->
         <!-- Accounts payable -->
         <section class="area payable">
-            <div class="add-account-area">
+            <!-- Modal Config -->
+            <section class="modal" id="modal-add">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <!-- Close modal -->
+                    <span class="close" id="btn-close-add">&times;</span>
+
+                    <!-- Type account -->
+                    <div>
+                        <label for="type">Tipo da Conta: </label>
+                        <select name="type" id="type">
+                            <option value="luz">Luz</option>
+                            <option value="agua">Água</option>
+                            <option value="fixo">Conta Fixa</option>
+                            <option value="pix">Pix</option>
+                            <option value="compras">Compras</option>
+                        </select>
+                    </div>
+
+                    <!-- Value -->
+                    <div>
+                        <label for="value">Valor: </label>
+                        <input 
+                        type="text"
+                        name="value"
+                        id="value"
+                        class="input-money">
+                    </div>
+
+                    <div>
+                        <label for="venc">Vencimento: </label>
+                        <input 
+                        type="text"
+                        name="venc"
+                        id="venc"
+                        class="fullDate"
+                        placeholder="__/__/____">
+                    </div>
+
+                    <div>
+                        <label for="parcelas">Parcelas: </label>
+                        <input 
+                        type="text"
+                        name="parcelas"
+                        id="parcelas"
+                        class="parcelas">
+                    </div>
+
+                    <div>
+                        <label for="pago">Pago: </label>
+                        <select name="pago" id="pago">
+                            <option value="true">Sim</option>
+                            <option value="false" selected>Não</option>
+                        </select>
+                    </div>
+                    <div>
+                        <!-- Submit -->
+                        <button class="btn-submit" id="btn-submit-add">Enviar</button>
+                    </div>
+                </div>
+            </section>
+            <div class="add-account-area" id="add-account-area">
                 <!-- Image -->
                 <span class="add-icon">
                     <!-- Add icon -->

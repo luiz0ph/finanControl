@@ -380,8 +380,20 @@ footer {
     margin: 30px 0;
 }
 
+table:nth-child(odd){
+    background-color: #fff;
+}
+
+table:nth-child(even) {
+    background-color: #a8a29e;
+}
+
 th {
     background-color: var(--background-card);
+}
+
+td, th {
+    text-align: center;
 }
 
 .pay th, td {

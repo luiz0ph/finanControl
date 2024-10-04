@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var accounts = [];
+    var saveAccounts = [];
     // Open modal config
     $('#btn-config').on('click', function () {
         $('#modal-config').toggle(400);
@@ -66,10 +66,40 @@ $(document).ready(function () {
                 pago = false;
             }
             var newAccount = new account(type, value, venc, parcelas, pago);
-            accounts.push(newAccount);
-            alert(JSON.stringify(accounts, null, 2));
+            saveAccounts.push(newAccount);
+            var accounts = JSON.stringify(saveAccounts, null, 2);
+            if (localStorage) {
+                localStorage.setItem('accounts', accounts);
+                loadAccounts();
+                console.log('Contas salvas com sucesso');
+                $('#modal-add').toggle(400);
+                $('body').css('overflow', 'auto');
+            }
+            else {
+                alert('Seu dispositivo não é compativel com o salvamento local');
+            }
         }
     });
+    $(window).on('load', function () {
+        loadAccounts();
+    });
+    function loadAccounts() {
+        $('#pay').html("\n            <tr>\n                <th>\n                    Tipo\n                </th>\n                <th>\n                    Valor\n                </th>\n                <th>\n                    Venc\n                </th>\n                <th>\n                    Parcelas\n                </th>\n                <th>\n                    Pagar\n                </th>\n            </tr>");
+        // String JSON
+        var accountsJson = localStorage.getItem('accounts');
+        if (accountsJson) {
+            // To convert a JSON string to an object.
+            saveAccounts = JSON.parse(accountsJson);
+            for (var i = 0; i < saveAccounts.length; i++) {
+                if (!saveAccounts[i].paid) {
+                    $('#pay').append("\n                        <tr>\n                            <td>".concat(saveAccounts[i].type, "</td>\n                            <td>").concat(saveAccounts[i].value, "</td>\n                            <td>").concat(saveAccounts[i].due, "</td>\n                            <td>").concat(saveAccounts[i].installments, "</td>\n                            <td><button>Pagar</button></td>\n                        </tr>"));
+                }
+            }
+        }
+        else {
+            console.error('Nenhuma conta encontrada no localStorage.');
+        }
+    }
     // Mask input
     $('#venc').mask('00/00/0000');
 });

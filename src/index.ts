@@ -1,5 +1,21 @@
 $(document).ready(() => {
     let saveAccounts: account[] = [];
+    function save() {
+        // Transform into a JSON string.
+        const accounts = JSON.stringify(saveAccounts, null, 2); 
+            
+        if (localStorage) {
+            // Store the accounts locally.
+            localStorage.setItem('accounts', accounts);
+            loadAccounts();
+            console.log('Contas salvas com sucesso');
+            $('#modal-add').toggle(400); // Close the modal
+            $('body').css('overflow', 'auto');
+        } else {
+            // Alert if the user's device is not compatible with localStorage
+            alert('Seu dispositivo não é compativel com o salvamento local');
+        }
+    }
     // Open modal config
     $('#btn-config').on('click', () => {
         $('#modal-config').toggle(400);
@@ -95,20 +111,7 @@ $(document).ready(() => {
             // Store the object in an array to create the table.
             saveAccounts.push(newAccount);
 
-            // Transform into a JSON string.
-            const accounts = JSON.stringify(saveAccounts, null, 2); 
-            
-            if (localStorage) {
-                // Store the accounts locally.
-                localStorage.setItem('accounts', accounts);
-                loadAccounts();
-                console.log('Contas salvas com sucesso');
-                $('#modal-add').toggle(400); // Close the modal
-                $('body').css('overflow', 'auto');
-            } else {
-                // Alert if the user's device is not compatible with localStorage
-                alert('Seu dispositivo não é compativel com o salvamento local');
-            }
+            save();
         }
     })
 
@@ -139,6 +142,28 @@ $(document).ready(() => {
                 </th>
             </tr>`)
 
+            $('#accounts').html(`
+            <tr>
+                <th>
+                    Tipo
+                </th>
+                <th>
+                    Valor
+                </th>
+                <th>
+                    Venc
+                </th>
+                <th>
+                    Parcelas
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Edit
+                </th>
+            </tr>`)
+
         // String JSON
         const accountsJson = localStorage.getItem('accounts');
 
@@ -146,7 +171,12 @@ $(document).ready(() => {
         if (accountsJson) {
             // To convert a JSON string to an object
             saveAccounts = JSON.parse(accountsJson);
-            
+            saveAccounts = saveAccounts.sort((a, b) => {
+                const dateA = parseDate(a.due);
+                const dateB = parseDate(b.due);
+                return dateB.getTime() - dateA.getTime();
+            })
+
             // Loop to load the table rows
             for (let i: number = 0; i < saveAccounts.length; i++) {
                 // If the account has not been paid yet.
@@ -156,10 +186,34 @@ $(document).ready(() => {
                             <td>${saveAccounts[i].type}</td>
                             <td>${saveAccounts[i].value}</td>
                             <td>${saveAccounts[i].due}</td>
-                            <td>${saveAccounts[i].installments}</td>
+                            <td>${saveAccounts[i].installments}X</td>
                             <td><button class="btn-pay" data-index="${i}">Pagar</button></td>
                         </tr>`);
                 }
+
+                let status:string;
+                let color:string;
+                if (saveAccounts[i].paid) {
+                    color = "#00ff00"
+                    status = "Pago"
+                } else {
+                    color = "#ff0000"
+                    status = "A Pagar"
+                }
+
+                $('#accounts').append(`
+                    <tr>
+                        <td>${saveAccounts[i].type}</td>
+                        <td>${saveAccounts[i].value}</td>
+                        <td>${saveAccounts[i].due}</td>
+                        <td>${saveAccounts[i].installments}X</td>
+                        <td style="color: ${color};">${status}</td>
+                        <td>
+                            <button class="btn-edit" data-index="${i}">
+                                <img src="/public/img/icons/config-icon.svg" alt="">
+                            </button>
+                        </td>
+                    </tr>`)
             }
         } else {
             // Error
@@ -180,6 +234,56 @@ $(document).ready(() => {
         const accounts = JSON.stringify(saveAccounts, null, 2);
         localStorage.setItem('accounts', accounts);
         loadAccounts();
+    })
+
+    $(document).on('click', '.btn-edit', function() {
+        saveAccounts = JSON.parse(localStorage.getItem('accounts'));
+
+        const index = $(this).data('index');
+
+        // Modal edit
+        $('#modal-edit').toggle(400);
+        $('body').css('overflow', 'hidden');
+
+        const type = saveAccounts[index].type;
+        const value = saveAccounts[index].value;
+        const due = saveAccounts[index].due;
+        const installments = saveAccounts[index].installments;
+        const paid = String(saveAccounts[index].paid);
+
+        $('#type-edit').val(type);
+        $('#value-edit').val(value);
+        $('#due-edit').val(due);
+        $('#installments-edit').val(installments);
+        $('#paid-edit').val(paid);
+        
+        $('#btn-submit-edit').on('click', () => {
+            saveAccounts[index].type = String($('#type-edit').val());
+            saveAccounts[index].value = String($('#value-edit').val());
+            saveAccounts[index].due = String($('#due-edit').val());
+            saveAccounts[index].installments = Number($('#installments-edit').val());
+            saveAccounts[index].paid = Boolean($('#paid-edit').val());
+
+            $('#modal-edit').toggle(400);
+            $('body').css('overflow', 'auto');   
+        })
+    })
+
+    function parseDate(dateStr: string): Date {
+        const [day, month, year] = dateStr.split('/').map(Number);
+        return new Date(year, month - 1, day);
+    }
+
+    $('#btn-close-edit').on('click', () => {
+        $('#modal-edit').toggle(400);
+        $('body').css('overflow', 'auto');   
+    })
+
+    $(window).on('click', (event) => {
+        if (event.target === $('#modal-edit').get(0)) {
+            $('#modal-edit').toggle(400);
+            $('body').css('overflow', 'auto');
+        }
     })
 
     // Mask input

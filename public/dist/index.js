@@ -1,5 +1,21 @@
 $(document).ready(function () {
     var saveAccounts = [];
+    function save() {
+        // Transform into a JSON string.
+        var accounts = JSON.stringify(saveAccounts, null, 2);
+        if (localStorage) {
+            // Store the accounts locally.
+            localStorage.setItem('accounts', accounts);
+            loadAccounts();
+            console.log('Contas salvas com sucesso');
+            $('#modal-add').toggle(400); // Close the modal
+            $('body').css('overflow', 'auto');
+        }
+        else {
+            // Alert if the user's device is not compatible with localStorage
+            alert('Seu dispositivo não é compativel com o salvamento local');
+        }
+    }
     // Open modal config
     $('#btn-config').on('click', function () {
         $('#modal-config').toggle(400);
@@ -72,20 +88,7 @@ $(document).ready(function () {
             var newAccount = new account(type, value, venc, parcelas, pago);
             // Store the object in an array to create the table.
             saveAccounts.push(newAccount);
-            // Transform into a JSON string.
-            var accounts = JSON.stringify(saveAccounts, null, 2);
-            if (localStorage) {
-                // Store the accounts locally.
-                localStorage.setItem('accounts', accounts);
-                loadAccounts();
-                console.log('Contas salvas com sucesso');
-                $('#modal-add').toggle(400); // Close the modal
-                $('body').css('overflow', 'auto');
-            }
-            else {
-                // Alert if the user's device is not compatible with localStorage
-                alert('Seu dispositivo não é compativel com o salvamento local');
-            }
+            save();
         }
     });
     // Load the tables when the window is reloaded.
@@ -96,18 +99,35 @@ $(document).ready(function () {
     function loadAccounts() {
         // Clear the entire table and add the titles.
         $('#pay').html("\n            <tr>\n                <th>\n                    Tipo\n                </th>\n                <th>\n                    Valor\n                </th>\n                <th>\n                    Venc\n                </th>\n                <th>\n                    Parcelas\n                </th>\n                <th>\n                    Pagar\n                </th>\n            </tr>");
+        $('#accounts').html("\n            <tr>\n                <th>\n                    Tipo\n                </th>\n                <th>\n                    Valor\n                </th>\n                <th>\n                    Venc\n                </th>\n                <th>\n                    Parcelas\n                </th>\n                <th>\n                    Status\n                </th>\n                <th>\n                    Edit\n                </th>\n            </tr>");
         // String JSON
         var accountsJson = localStorage.getItem('accounts');
         // If the variable accountsJson exists
         if (accountsJson) {
             // To convert a JSON string to an object
             saveAccounts = JSON.parse(accountsJson);
+            saveAccounts = saveAccounts.sort(function (a, b) {
+                var dateA = parseDate(a.due);
+                var dateB = parseDate(b.due);
+                return dateB.getTime() - dateA.getTime();
+            });
             // Loop to load the table rows
             for (var i = 0; i < saveAccounts.length; i++) {
                 // If the account has not been paid yet.
                 if (!saveAccounts[i].paid) {
-                    $('#pay').append("\n                        <tr>\n                            <td>".concat(saveAccounts[i].type, "</td>\n                            <td>").concat(saveAccounts[i].value, "</td>\n                            <td>").concat(saveAccounts[i].due, "</td>\n                            <td>").concat(saveAccounts[i].installments, "</td>\n                            <td><button class=\"btn-pay\" data-index=\"").concat(i, "\">Pagar</button></td>\n                        </tr>"));
+                    $('#pay').append("\n                        <tr>\n                            <td>".concat(saveAccounts[i].type, "</td>\n                            <td>").concat(saveAccounts[i].value, "</td>\n                            <td>").concat(saveAccounts[i].due, "</td>\n                            <td>").concat(saveAccounts[i].installments, "X</td>\n                            <td><button class=\"btn-pay\" data-index=\"").concat(i, "\">Pagar</button></td>\n                        </tr>"));
                 }
+                var status_1 = void 0;
+                var color = void 0;
+                if (saveAccounts[i].paid) {
+                    color = "#00ff00";
+                    status_1 = "Pago";
+                }
+                else {
+                    color = "#ff0000";
+                    status_1 = "A Pagar";
+                }
+                $('#accounts').append("\n                    <tr>\n                        <td>".concat(saveAccounts[i].type, "</td>\n                        <td>").concat(saveAccounts[i].value, "</td>\n                        <td>").concat(saveAccounts[i].due, "</td>\n                        <td>").concat(saveAccounts[i].installments, "X</td>\n                        <td style=\"color: ").concat(color, ";\">").concat(status_1, "</td>\n                        <td>\n                            <button class=\"btn-edit\" data-index=\"").concat(i, "\">\n                                <img src=\"/public/img/icons/config-icon.svg\" alt=\"\">\n                            </button>\n                        </td>\n                    </tr>"));
             }
         }
         else {
@@ -126,6 +146,46 @@ $(document).ready(function () {
         var accounts = JSON.stringify(saveAccounts, null, 2);
         localStorage.setItem('accounts', accounts);
         loadAccounts();
+    });
+    $(document).on('click', '.btn-edit', function () {
+        saveAccounts = JSON.parse(localStorage.getItem('accounts'));
+        var index = $(this).data('index');
+        // Modal edit
+        $('#modal-edit').toggle(400);
+        $('body').css('overflow', 'hidden');
+        var type = saveAccounts[index].type;
+        var value = saveAccounts[index].value;
+        var due = saveAccounts[index].due;
+        var installments = saveAccounts[index].installments;
+        var paid = String(saveAccounts[index].paid);
+        $('#type-edit').val(type);
+        $('#value-edit').val(value);
+        $('#due-edit').val(due);
+        $('#installments-edit').val(installments);
+        $('#paid-edit').val(paid);
+        $('#btn-submit-edit').on('click', function () {
+            saveAccounts[index].type = String($('#type-edit').val());
+            saveAccounts[index].value = String($('#value-edit').val());
+            saveAccounts[index].due = String($('#due-edit').val());
+            saveAccounts[index].installments = Number($('#installments-edit').val());
+            saveAccounts[index].paid = Boolean($('#paid-edit').val());
+            $('#modal-edit').toggle(400);
+            $('body').css('overflow', 'auto');
+        });
+    });
+    function parseDate(dateStr) {
+        var _a = dateStr.split('/').map(Number), day = _a[0], month = _a[1], year = _a[2];
+        return new Date(year, month - 1, day);
+    }
+    $('#btn-close-edit').on('click', function () {
+        $('#modal-edit').toggle(400);
+        $('body').css('overflow', 'auto');
+    });
+    $(window).on('click', function (event) {
+        if (event.target === $('#modal-edit').get(0)) {
+            $('#modal-edit').toggle(400);
+            $('body').css('overflow', 'auto');
+        }
     });
     // Mask input
     $('#venc').mask('00/00/0000');

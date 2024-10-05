@@ -276,6 +276,68 @@
 
         <!-- All accounts -->
         <section class="area accounts">
+            <!-- Modal Config -->
+            <section class="modal" id="modal-edit">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <!-- Close modal -->
+                    <span class="close" id="btn-close-edit">&times;</span>
+
+                    <!-- Type account -->
+                    <div>
+                        <label for="type-edit">Tipo da Conta: </label>
+                        <select name="type-edit" id="type-edit">
+                            <option value="Luz">Luz</option>
+                            <option value="Água">Água</option>
+                            <option value="Fixo">Conta Fixa</option>
+                            <option value="Pix">Pix</option>
+                            <option value="Compras">Compras</option>
+                        </select>
+                    </div>
+
+                    <!-- Value -->
+                    <div>
+                        <label for="value-edit">Valor: </label>
+                        <input 
+                        type="text"
+                        name="value-edit"
+                        id="value-edit"
+                        class="input-money">
+                    </div>
+
+                    <div>
+                        <label for="due-edit">Vencimento: </label>
+                        <input 
+                        type="text"
+                        name="due-edit"
+                        id="due-edit"
+                        class="fullDate"
+                        placeholder="__/__/____">
+                    </div>
+
+                    <div>
+                        <label for="installments-edit">Parcelas: </label>
+                        <input 
+                        type="text"
+                        name="installments-edit"
+                        id="installments-edit"
+                        class="parcelas">
+                    </div>
+
+                    <div>
+                        <label for="paid-edit">Pago: </label>
+                        <select name="paid-edit" id="paid-edit">
+                            <option value="true">Sim</option>
+                            <option value="false">Não</option>
+                        </select>
+                    </div>
+                    <div>
+                        <!-- Submit -->
+                        <button class="btn-submit" id="btn-submit-edit">Enviar</button>
+                    </div>
+                </div>
+            </section>
+
             <!-- Section title -->
             <div class="section-title">
                 <h2>Todas as Contas</h2>

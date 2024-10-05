@@ -1,16 +1,19 @@
 $(document).ready(() => {
     let saveAccounts: account[] = [];
     function save() {
+        saveAccounts = saveAccounts.sort((a, b) => {
+            const dateA = parseDate(a.due);
+            const dateB = parseDate(b.due);
+            return dateB.getTime() - dateA.getTime();
+        })
         // Transform into a JSON string.
         const accounts = JSON.stringify(saveAccounts, null, 2); 
-            
+        
         if (localStorage) {
             // Store the accounts locally.
             localStorage.setItem('accounts', accounts);
             loadAccounts();
             console.log('Contas salvas com sucesso');
-            $('#modal-add').toggle(400); // Close the modal
-            $('body').css('overflow', 'auto');
         } else {
             // Alert if the user's device is not compatible with localStorage
             alert('Seu dispositivo não é compativel com o salvamento local');
@@ -67,6 +70,8 @@ $(document).ready(() => {
 
     // Open modal add
     $('#add-account-area').on('click', () => {
+        $('#venc').val(getCurrentDate());
+
         $('#modal-add').toggle(400);
         $('body').css('overflow', 'hidden');
     })
@@ -112,6 +117,16 @@ $(document).ready(() => {
             saveAccounts.push(newAccount);
 
             save();
+
+            $('#modal-add').toggle(400);
+            $('body').css('overflow', 'auto');
+
+             // Clear modal inputs after adding
+             $('#type').val('');
+             $('#value').val('');
+             $('#venc').val('');
+             $('#parcelas').val('');
+             $('#pago').val('false');
         }
     })
 
@@ -171,11 +186,6 @@ $(document).ready(() => {
         if (accountsJson) {
             // To convert a JSON string to an object
             saveAccounts = JSON.parse(accountsJson);
-            saveAccounts = saveAccounts.sort((a, b) => {
-                const dateA = parseDate(a.due);
-                const dateB = parseDate(b.due);
-                return dateB.getTime() - dateA.getTime();
-            })
 
             // Loop to load the table rows
             for (let i: number = 0; i < saveAccounts.length; i++) {
@@ -238,40 +248,52 @@ $(document).ready(() => {
 
     $(document).on('click', '.btn-edit', function() {
         saveAccounts = JSON.parse(localStorage.getItem('accounts'));
-
         const index = $(this).data('index');
 
         // Modal edit
         $('#modal-edit').toggle(400);
         $('body').css('overflow', 'hidden');
 
-        const type = saveAccounts[index].type;
-        const value = saveAccounts[index].value;
-        const due = saveAccounts[index].due;
-        const installments = saveAccounts[index].installments;
-        const paid = String(saveAccounts[index].paid);
+        $('#type-edit').val(saveAccounts[index].type);
+        $('#value-edit').val(saveAccounts[index].value);
+        $('#due-edit').val(saveAccounts[index].due);
+        $('#installments-edit').val(saveAccounts[index].installments);
+        $('#paid-edit').val(String(saveAccounts[index].paid));
 
-        $('#type-edit').val(type);
-        $('#value-edit').val(value);
-        $('#due-edit').val(due);
-        $('#installments-edit').val(installments);
-        $('#paid-edit').val(paid);
-        
-        $('#btn-submit-edit').on('click', () => {
+        $('#btn-submit-edit').off('click').on('click', () => {
             saveAccounts[index].type = String($('#type-edit').val());
             saveAccounts[index].value = String($('#value-edit').val());
             saveAccounts[index].due = String($('#due-edit').val());
             saveAccounts[index].installments = Number($('#installments-edit').val());
-            saveAccounts[index].paid = Boolean($('#paid-edit').val());
+            saveAccounts[index].paid = $('#paid-edit').val() === 'true';
+
+            save();
 
             $('#modal-edit').toggle(400);
-            $('body').css('overflow', 'auto');   
+            $('body').css('overflow', 'auto');
+        });
+
+        $('#btn-delete').off('click').on('click', () => {
+            saveAccounts.splice(index, 1);
+            save();
+
+            $('#modal-edit').toggle(400);
+            $('body').css('overflow', 'auto');            
         })
-    })
+    });
 
     function parseDate(dateStr: string): Date {
         const [day, month, year] = dateStr.split('/').map(Number);
         return new Date(year, month - 1, day);
+    }
+
+    function getCurrentDate(): string {
+        const today = new Date();
+        const day = String(today.getDate()).padStart(2, '0');
+        const month = String(today.getMonth() + 1).padStart(2, '0'); // Janeiro é 0!
+        const year = today.getFullYear();
+
+        return `${day}/${month}/${year}`;
     }
 
     $('#btn-close-edit').on('click', () => {

@@ -64,7 +64,7 @@
                 <span class="close" id="btn-close-config">&times;</span>
 
                 <!-- Earnings per month -->
-                <div>
+                <div class="input-area">
                     <label for="earnings">Ganhos por mês: </label>
                     <input
                     type="text"
@@ -74,7 +74,7 @@
                     autocomplete="off">
                 </div>
                 <!-- Salary date -->
-                <div>
+                <div class="input-area">
                     <label for="salary-date">Dia do Salário: </label>
                     <input
                     type="text"
@@ -84,7 +84,7 @@
                     autocomplete="off">
                 </div>
                 <!-- Current balance -->
-                <div>
+                <div class="input-area">
                     <label for="current-balance">Saldo Atual: </label>
                     <input
                     type="text"
@@ -94,7 +94,7 @@
                     autocomplete="off">
                 </div>
 
-                <div>
+                <div class="btn-area">
                     <!-- Submit -->
                     <button class="btn-submit" id="btn-submit-config">Enviar</button>
                 </div>
@@ -168,7 +168,7 @@
                     <span class="close" id="btn-close-add">&times;</span>
 
                     <!-- Type account -->
-                    <div>
+                    <div class="input-area">
                         <label for="type">Tipo da Conta: </label>
                         <select name="type" id="type">
                             <option value="Luz">Luz</option>
@@ -180,7 +180,7 @@
                     </div>
 
                     <!-- Value -->
-                    <div>
+                    <div class="input-area">
                         <label for="value">Valor: </label>
                         <input 
                         type="text"
@@ -189,7 +189,7 @@
                         class="input-money">
                     </div>
 
-                    <div>
+                    <div class="input-area">
                         <label for="venc">Vencimento: </label>
                         <input 
                         type="text"
@@ -199,7 +199,7 @@
                         placeholder="__/__/____">
                     </div>
 
-                    <div>
+                    <div class="input-area">
                         <label for="parcelas">Parcelas: </label>
                         <input 
                         type="text"
@@ -208,14 +208,14 @@
                         class="parcelas">
                     </div>
 
-                    <div>
+                    <div class="input-area">
                         <label for="pago">Pago: </label>
                         <select name="pago" id="pago">
                             <option value="true">Sim</option>
                             <option value="false" selected>Não</option>
                         </select>
                     </div>
-                    <div>
+                    <div class="btn-area">
                         <!-- Submit -->
                         <button class="btn-submit" id="btn-submit-add">Enviar</button>
                     </div>
@@ -284,7 +284,7 @@
                     <span class="close" id="btn-close-edit">&times;</span>
 
                     <!-- Type account -->
-                    <div>
+                    <div class="input-area">
                         <label for="type-edit">Tipo da Conta: </label>
                         <select name="type-edit" id="type-edit">
                             <option value="Luz">Luz</option>
@@ -296,7 +296,7 @@
                     </div>
 
                     <!-- Value -->
-                    <div>
+                    <div class="input-area">
                         <label for="value-edit">Valor: </label>
                         <input 
                         type="text"
@@ -305,7 +305,7 @@
                         class="input-money">
                     </div>
 
-                    <div>
+                    <div class="input-area">
                         <label for="due-edit">Vencimento: </label>
                         <input 
                         type="text"
@@ -315,7 +315,7 @@
                         placeholder="__/__/____">
                     </div>
 
-                    <div>
+                    <div class="input-area">
                         <label for="installments-edit">Parcelas: </label>
                         <input 
                         type="text"
@@ -324,16 +324,20 @@
                         class="parcelas">
                     </div>
 
-                    <div>
+                    <div class="input-area">
                         <label for="paid-edit">Pago: </label>
                         <select name="paid-edit" id="paid-edit">
                             <option value="true">Sim</option>
                             <option value="false">Não</option>
                         </select>
                     </div>
-                    <div>
+
+                    <div class="btn-area">
                         <!-- Submit -->
                         <button class="btn-submit" id="btn-submit-edit">Enviar</button>
+
+                        <!-- Delete -->
+                        <button class="btn-submit" id="btn-delete">Deletar</button>
                     </div>
                 </div>
             </section>

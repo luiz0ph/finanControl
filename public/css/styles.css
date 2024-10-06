@@ -549,7 +549,17 @@ td, th {
     flex-flow: column wrap;
     justify-content: space-between;
     align-items: center;
+}
 
+.chart-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#myChart {
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px #00000050;
 }
 
 @media (min-width: 600px) {

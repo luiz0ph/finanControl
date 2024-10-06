@@ -1,5 +1,81 @@
 $(document).ready(() => {
     let saveAccounts = [];
+    let salary = {
+        salary: '0',
+        date: 0,
+        balance: '0',
+        lastUpdate: {
+            month: getCurrentDate().month,
+            year: getCurrentDate().year
+        }
+    };
+    function getCurrentDate() {
+        const today = new Date();
+        const day = today.getDate();
+        const month = today.getMonth();
+        const year = today.getFullYear();
+        return { day, month, year };
+    }
+    if (!localStorage.getItem('salary')) {
+        $('#modal-config').toggle(400);
+        $('body').css('overflow', 'hidden');
+    }
+    $('#btn-submit-config').on('click', () => {
+        salary.salary = String($('#earnings').val());
+        salary.date = Number($('#salary-date').val());
+        salary.balance = String($('#current-balance').val());
+        const salaryJSON = JSON.stringify(salary);
+        localStorage.setItem('salary', salaryJSON);
+        loadDashboard();
+        $('#modal-config').toggle(400);
+        $('body').css('overflow', 'auto');
+    });
+    // Load the tables when the window is reloaded.
+    $(window).on('load', () => {
+        salary = JSON.parse(localStorage.getItem('salary'));
+        loadAccounts();
+        checkBalance();
+        loadDashboard();
+    });
+    // Dashboard
+    function loadDashboard() {
+        saveAccounts = JSON.parse(localStorage.getItem('accounts'));
+        salary = JSON.parse(localStorage.getItem('salary'));
+        let toPay = 0;
+        for (let i = 0; i < saveAccounts.length; i++) {
+            let value = parseFloat(saveAccounts[i].value.replace(/\./g, '').replace(',', '.'));
+            if (!saveAccounts[i].paid) {
+                toPay += value;
+            }
+        }
+        const valueBr = toPay.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        let Earnings = parseFloat(salary.salary.replace(/\./g, '').replace(',', '.'));
+        Earnings -= toPay;
+        const earningsBr = Earnings.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        const balance = Number(salary.balance.replace(/\./g, '').replace(',', '.')).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        $('#value-to-pay').text(valueBr);
+        $('#value-earnings').text(earningsBr);
+        $('#balance').text(balance);
+    }
+    const savedDay = parseInt(salary.date.toString());
+    let lastUpdate = salary.lastUpdate;
+    function addBalance() {
+        let balance = parseFloat(salary.balance.replace(/\./g, '').replace(',', '.')) || 0;
+        const add = parseFloat(salary.salary.replace(/\./g, '').replace(',', '.'));
+        balance += add;
+        salary.balance = String(balance);
+        const currentDate = getCurrentDate();
+        lastUpdate = { month: currentDate.month, year: currentDate.year };
+        salary.lastUpdate = lastUpdate;
+        const salaryJSON = JSON.stringify(salary);
+        localStorage.setItem('salary', salaryJSON);
+    }
+    function checkBalance() {
+        const currentDate = getCurrentDate();
+        if (currentDate.day === savedDay && (lastUpdate.month !== currentDate.month || lastUpdate.year !== currentDate.year)) {
+            addBalance();
+        }
+    }
     function save() {
         saveAccounts = saveAccounts.sort((a, b) => {
             const dateA = parseDate(a.due);
@@ -12,6 +88,7 @@ $(document).ready(() => {
             // Store the accounts locally.
             localStorage.setItem('accounts', accounts);
             loadAccounts();
+            loadDashboard();
             console.log('Contas salvas com sucesso');
         }
         else {
@@ -51,7 +128,13 @@ $(document).ready(() => {
     $('.input-date').mask('00'); // Mask date
     // Open modal add
     $('#add-account-area').on('click', () => {
-        $('#venc').val(getCurrentDate());
+        const date = new Date();
+        const formattedDate = [
+            String(date.getDate()).padStart(2, '0'),
+            String(date.getMonth() + 1).padStart(2, '0'),
+            date.getFullYear()
+        ].join('/');
+        $('#venc').val(formattedDate);
         $('#modal-add').toggle(400);
         $('body').css('overflow', 'hidden');
     });
@@ -101,10 +184,6 @@ $(document).ready(() => {
             $('#parcelas').val('');
             $('#pago').val('false');
         }
-    });
-    // Load the tables when the window is reloaded.
-    $(window).on('load', () => {
-        loadAccounts();
     });
     // Function to load the tables.
     function loadAccounts() {
@@ -200,14 +279,17 @@ $(document).ready(() => {
     // Function to pay the account
     $(document).on('click', '.btn-pay', function () {
         saveAccounts = JSON.parse(localStorage.getItem('accounts'));
-        // Get the stored data from the HTML tag.
+        salary = JSON.parse(localStorage.getItem('salary'));
         const index = $(this).data('index');
-        // Access by the index retrieved from the HTML tag.
         saveAccounts[index].paid = true;
-        // Store locally and reload the table.
-        const accounts = JSON.stringify(saveAccounts, null, 2);
-        localStorage.setItem('accounts', accounts);
-        loadAccounts();
+        let currentBalance = parseFloat(salary.balance.replace(/\./g, '').replace(',', '.'));
+        let value = parseFloat(saveAccounts[index].value.replace(/\./g, '').replace(',', '.'));
+        currentBalance -= value;
+        salary.balance = String(currentBalance);
+        const salaryJSON = JSON.stringify(salary);
+        localStorage.setItem('salary', salaryJSON);
+        save();
+        location.reload();
     });
     $(document).on('click', '.btn-edit', function () {
         saveAccounts = JSON.parse(localStorage.getItem('accounts'));
@@ -241,10 +323,10 @@ $(document).ready(() => {
         const [day, month, year] = dateStr.split('/').map(Number);
         return new Date(year, month - 1, day);
     }
-    function getCurrentDate() {
+    function getDate() {
         const today = new Date();
         const day = String(today.getDate()).padStart(2, '0');
-        const month = String(today.getMonth() + 1).padStart(2, '0'); // Janeiro é 0!
+        const month = String(today.getMonth() + 1).padStart(2, '0');
         const year = today.getFullYear();
         return `${day}/${month}/${year}`;
     }

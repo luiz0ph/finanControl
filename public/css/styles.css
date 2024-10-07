@@ -516,7 +516,7 @@ td, th {
     transition: 0.4s all ease-in-out;
 }
 
-.btn-pay {
+.btn-pay, .btn-pay-pay {
     width: 100%; 
     padding: 0.4rem 0;
     border-radius: 8px;

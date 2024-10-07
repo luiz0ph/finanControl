@@ -19,6 +19,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!-- Google Chart -->
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- Mask input -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
     <title>FinanControl</title>
 </head>
@@ -53,16 +57,71 @@
 
     <!-- Main -->
     <main>
-
-        <!-- 
-         !
-         Adicionar o modal, não esquecer
-         !
-        -->
-
         <!-- Accounts payable -->
         <section class="area payable">
-            <div class="add-account-area">
+            <!-- Modal Config -->
+            <section class="modal" id="modal-add-pay">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <!-- Close modal -->
+                    <span class="close" id="btn-close-add-pay">&times;</span>
+
+                    <!-- Type account -->
+                    <div class="input-area">
+                        <label for="type-pay">Tipo da Conta: </label>
+                        <select name="type" id="type-pay">
+                            <option value="Luz">Luz</option>
+                            <option value="Água">Água</option>
+                            <option value="Fixo">Conta Fixa</option>
+                            <option value="Pix">Pix</option>
+                            <option value="Compras">Compras</option>
+                        </select>
+                    </div>
+
+                    <!-- Value -->
+                    <div class="input-area">
+                        <label for="value-pay">Valor: </label>
+                        <input 
+                        type="text"
+                        name="value"
+                        id="value-pay"
+                        class="input-money">
+                    </div>
+
+                    <div class="input-area">
+                        <label for="venc-pay">Vencimento: </label>
+                        <input 
+                        type="text"
+                        name="venc"
+                        id="venc-pay"
+                        class="fullDate"
+                        placeholder="__/__/____">
+                    </div>
+
+                    <div class="input-area">
+                        <label for="parcelas-pay">Parcelas: </label>
+                        <input 
+                        type="text"
+                        name="parcelas"
+                        id="parcelas-pay"
+                        class="parcelas">
+                    </div>
+
+                    <div class="input-area">
+                        <label for="pago-pay">Pago: </label>
+                        <select name="pago" id="pago-pay">
+                            <option value="true">Sim</option>
+                            <option value="false" selected>Não</option>
+                        </select>
+                    </div>
+                    <div class="btn-area">
+                        <!-- Submit -->
+                        <button class="btn-submit" id="btn-submit-add-pay">Enviar</button>
+                    </div>
+                </div>
+            </section>
+
+            <div class="add-account-area" id="add-account-area-pay">
                 <!-- Image -->
                 <span class="add-icon">
                     <!-- Add icon -->
@@ -82,7 +141,7 @@
 
             <!-- Table -->
             <div class="table-area">
-                <table class="pay">
+                <table class="pay" id="pay-pay">
                     <tr class="table-title-row">
                         <!-- Type -->
                         <th>
@@ -96,7 +155,7 @@
 
                         <!-- Due date -->
                         <th>
-                            Vencimento
+                            Venc
                         </th>
 
                         <!-- Installments -->
@@ -229,5 +288,6 @@
     </footer>
 
     <script defer src="/public/dist/index.js"></script>
+    <script defer src="/public/dist/pay.js"></script>
 </body>
 </html>

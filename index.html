@@ -33,20 +33,25 @@
         <!-- Navigation -->
         <nav>
             <!-- Menu -->
-            <section class="area-menu">
+            <section class="area-menu" id="open-menu">
                 <img src="public/img/menu.svg" alt="menu">
             </section>
 
-            <!-- List navigation -->
-            <section class="navigation">
-                <ul class="list">
-                    <li><a href="index.html">Home</a></li> <!-- This Page -->
-                    <li><a href="public/pages/todos.html">Todos</a></li>
-                    <li><a href="public/pages/pagar.html">Pagar</a></li>
-                    <li><a href="public/pages/contas.html">Contas</a></li>
-                    <li><a href="public/pages/relatorio.html">Relatório</a></li>
-                </ul>
-            </section>
+            <div id="overlay">
+                <!-- Button to close the overlay navigation -->
+                <a href="javascript:void(0)" class="closebtn" style="display: none;">&times;</a>
+
+                <!-- List navigation -->
+                <section class="navigation">
+                    <ul class="list">
+                        <li><a href="index.html">Home</a></li> <!-- This Page -->
+                        <li><a href="public/pages/todos.html">Todos</a></li>
+                        <li><a href="public/pages/pagar.html">Pagar</a></li>
+                        <li><a href="public/pages/contas.html">Contas</a></li>
+                        <li><a href="public/pages/relatorio.html">Relatório</a></li>
+                    </ul>
+                </section>
+            </div>
         </nav>
     </header>
 
@@ -309,6 +314,6 @@
         </div>
     </footer>
     
-    <script defer src="public/dist/animation.js"></script>
+    <script defer src="public/dist/index.js"></script>
 </body>
 </html>

@@ -37,20 +37,25 @@
         <!-- Navigation -->
         <nav>
             <!-- Menu -->
-            <section class="area-menu">
+            <section class="area-menu" id="open-menu">
                 <img src="../img/menu.svg" alt="menu">
             </section>
 
-            <!-- List navigation -->
-            <section class="navigation">
-                <ul class="list">
-                    <li><a href="../../index.html">Home</a></li>
-                    <li><a href="todos.html">Todos</a></li>
-                    <li><a href="pagar.html">Pagar</a></li>
-                    <li><a href="contas.html">Contas</a></li>
-                    <li><a href="relatorio.html">Relatório</a></li>
-                </ul>
-            </section>
+            <div id="overlay">
+                <!-- Button to close the overlay navigation -->
+                <a href="javascript:void(0)" class="closebtn" style="display: none;">&times;</a>
+
+                <!-- List navigation -->
+                <section class="navigation">
+                    <ul class="list">
+                        <li><a href="../../index.html">Home</a></li>
+                        <li><a href="todos.html">Todos</a></li>
+                        <li><a href="pagar.html">Pagar</a></li>
+                        <li><a href="contas.html">Contas</a></li>
+                        <li><a href="relatorio.html">Relatório</a></li>
+                    </ul>
+                </section>
+            </div>
         </nav>
     </header>
     
@@ -286,7 +291,7 @@
         </div>
     </footer>
 
-
+    <script defer src="../dist/index.js"></script>
     <script defer src="../dist/pay.js"></script>
 </body>
 </html>

@@ -13,7 +13,8 @@ $(document).ready(() => {
 
     // Load the tables when the window is reloaded.
     $(window).on('load', () => {
-        salary = JSON.parse(localStorage.getItem('salary'));
+        const savedSalary = localStorage.getItem('salary');
+        salary = savedSalary ? JSON.parse(savedSalary) : salary;
         checkBalance();
         loadDashboard();
     })
@@ -24,7 +25,7 @@ $(document).ready(() => {
         $('body').css('overflow', 'hidden');
     }
 
-    $(document).on('click', $('#btn-submit-config'), function() {
+    $('#btn-submit-config').on('click', function() {
 
         salary.salary = String($('#earnings').val());
         salary.date = Number($('#salary-date').val());
@@ -39,7 +40,7 @@ $(document).ready(() => {
         $('body').css('overflow', 'auto');
     });
 
-    $(document).on('click', '#btn-submit-config-report', function() {
+    $('#btn-submit-config-report').on('click',  function() {
 
         salary.salary = String($('#earnings-report').val());
         salary.date = Number($('#salary-date-report').val());
@@ -57,47 +58,60 @@ $(document).ready(() => {
     // Dashboard
     function loadDashboard(): void {
         if (window.location.href.indexOf('todos') > -1) {
-            saveAccounts = JSON.parse(localStorage.getItem('accounts'));
-            salary = JSON.parse(localStorage.getItem('salary'));
-
-            let toPay:number = 0;
-            for (let i:number = 0; i < saveAccounts.length; i++) {
-                let value = parseFloat(saveAccounts[i].value.replace(/\./g, '').replace(',', '.'));
-
-                if (!saveAccounts[i].paid) {
-                    toPay += value;
+            if (localStorage.getItem('salary')) {
+                if (localStorage.getItem('accounts')) {
+                    saveAccounts = JSON.parse(localStorage.getItem('accounts'));
+                    let toPay:number = 0;
+                    for (let i:number = 0; i < saveAccounts.length; i++) {
+                        let value = parseFloat(saveAccounts[i].value.replace(/\./g, '').replace(',', '.'));
+    
+                        if (!saveAccounts[i].paid) {
+                            toPay += value;
+                        }
+                    }
+    
+                    const valueBr:string = toPay.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                    let Earnings = parseFloat(salary.salary.replace(/\./g, '').replace(',', '.'));
+                    Earnings -= toPay;
+                    const earningsBr: string = Earnings.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'});
+                    $('#value-to-pay').text(valueBr);
+                    $('#value-earnings').text(earningsBr);
                 }
-            }
 
-            const valueBr:string = toPay.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-            let Earnings = parseFloat(salary.salary.replace(/\./g, '').replace(',', '.'));
-            Earnings -= toPay;
-            const earningsBr: string = Earnings.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'});
-            const balance = Number(salary.balance.replace(/\./g, '').replace(',', '.')).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})
-            $('#value-to-pay').text(valueBr);
-            $('#value-earnings').text(earningsBr);
-            $('#balance').text(balance);
+                salary = JSON.parse(localStorage.getItem('salary'));
+                const balance = Number(salary.balance.replace(/\./g, '').replace(',', '.')).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})
+                $('#balance').text(balance);
+            } else {
+                console.log('Nenhuma Conta encontrada');
+            }
         } else {
-            saveAccounts = JSON.parse(localStorage.getItem('accounts'));
-            salary = JSON.parse(localStorage.getItem('salary'));
+            if (localStorage.getItem('salary')) {
+                if (localStorage.getItem('accounts')) {
+                    saveAccounts = JSON.parse(localStorage.getItem('accounts'));
+                    let toPay:number = 0;
+                    for (let i:number = 0; i < saveAccounts.length; i++) {
+                        let value = parseFloat(saveAccounts[i].value.replace(/\./g, '').replace(',', '.'));
+        
+                        if (!saveAccounts[i].paid) {
+                            toPay += value;
+                        }
+                    }
+        
+                    const valueBr:string = toPay.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                    let Earnings = parseFloat(salary.salary.replace(/\./g, '').replace(',', '.'));
+                    Earnings -= toPay;
+                    const earningsBr: string = Earnings.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'});
 
-            let toPay:number = 0;
-            for (let i:number = 0; i < saveAccounts.length; i++) {
-                let value = parseFloat(saveAccounts[i].value.replace(/\./g, '').replace(',', '.'));
-
-                if (!saveAccounts[i].paid) {
-                    toPay += value;
+                    $('#value-to-pay-account').text(valueBr);
+                    $('#value-earnings-account').text(earningsBr);
                 }
+                
+                salary = JSON.parse(localStorage.getItem('salary'));
+                const balance = Number(salary.balance.replace(/\./g, '').replace(',', '.')).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})
+                $('#balance-account').text(balance);
+            } else {
+                console.log('Nenhuma conta encontrada');
             }
-
-            const valueBr:string = toPay.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-            let Earnings = parseFloat(salary.salary.replace(/\./g, '').replace(',', '.'));
-            Earnings -= toPay;
-            const earningsBr: string = Earnings.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'});
-            const balance = Number(salary.balance.replace(/\./g, '').replace(',', '.')).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})
-            $('#value-to-pay-account').text(valueBr);
-            $('#value-earnings-account').text(earningsBr);
-            $('#balance-account').text(balance);
         }
     }
 

@@ -11,14 +11,6 @@ $(document).ready(() => {
         }
     }
 
-    function getCurrentDate() {
-        const today = new Date();
-        const day = today.getDate(); 
-        const month = today.getMonth(); 
-        const year = today.getFullYear(); 
-        return { day, month, year };
-    }
-
     // Load the tables when the window is reloaded.
     $(window).on('load', () => {
         salary = JSON.parse(localStorage.getItem('salary'));
@@ -44,30 +36,6 @@ $(document).ready(() => {
             alert('Seu dispositivo não é compativel com o salvamento local');
         }
     }
-
-    interface Account {
-        type:string 
-        value:string
-        due:string // Due date
-        installments:number
-        paid:boolean
-    }
-
-    class account implements Account {
-        type: string;
-        value: string;
-        due: string;
-        installments: number;
-        paid: boolean;
-        constructor(type: string, value: string, due: string, installments: number, paid: boolean) {
-            this.type = type;
-            this.value = value;
-            this.due = due;
-            this.installments = installments;
-            this.paid = paid;
-        }
-    }
-
 
     // Mask input
     $('#value').mask('000.000.000.000.000,00', {reverse: true}); // Mask money index
@@ -354,11 +322,13 @@ $(document).ready(() => {
 
         currentBalance -= value;
         salary.balance = String(currentBalance);
+        salary.balance = currentBalance.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
         const salaryJSON = JSON.stringify(salary);
         localStorage.setItem('salary', salaryJSON);
 
         save();
+        location.reload();
     })
 
     $(document).on('click', '.btn-pay-pay', function() { // Do not replace with an arrow function because it causes an error.
@@ -373,16 +343,50 @@ $(document).ready(() => {
 
         currentBalance -= value;
         salary.balance = String(currentBalance);
+        salary.balance = currentBalance.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
         const salaryJSON = JSON.stringify(salary);
         localStorage.setItem('salary', salaryJSON);
 
         save();
+        location.reload();
+        
     })
 
 
     function parseDate(dateStr: string): Date {
         const [day, month, year] = dateStr.split('/').map(Number);
         return new Date(year, month - 1, day);
+    }
+
+    function getCurrentDate() {
+        const today = new Date();
+        const day = today.getDate(); 
+        const month = today.getMonth(); 
+        const year = today.getFullYear(); 
+        return { day, month, year };
+    }
+    
+    interface Account {
+        type:string 
+        value:string
+        due:string // Due date
+        installments:number
+        paid:boolean
+    }
+    
+    class account implements Account {
+        type: string;
+        value: string;
+        due: string;
+        installments: number;
+        paid: boolean;
+        constructor(type: string, value: string, due: string, installments: number, paid: boolean) {
+            this.type = type;
+            this.value = value;
+            this.due = due;
+            this.installments = installments;
+            this.paid = paid;
+        }
     }
 })

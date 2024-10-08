@@ -19,8 +19,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <!-- Google chart -->
+    <!-- Google Chart -->
     <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- Mask input -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
     <title>FinanControl</title>
 </head>
@@ -54,20 +56,75 @@
 
     <!-- Main -->
     <main>
+        <!-- Modal Config -->
+        <section class="modal" id="modal-config-account">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <!-- Close modal -->
+                <span class="close" id="btn-close-config-account">&times;</span>
 
-        <!-- Dashboard -->
+                <!-- Earnings per month -->
+                <div class="input-area">
+                    <label for="earnings-account">Ganhos por mês: </label>
+                    <input
+                    type="text"
+                    name="earnings"
+                    id="earnings-account"
+                    class="input-money"
+                    autocomplete="off">
+                </div>
+                <!-- Salary date -->
+                <div class="input-area">
+                    <label for="salary-date-account">Dia do Salário: </label>
+                    <input
+                    type="text"
+                    name="salary-date"
+                    id="salary-date-account"
+                    class="input-date"
+                    autocomplete="off">
+                </div>
+                <!-- Current balance -->
+                <div class="input-area">
+                    <label for="current-balance-account">Saldo Atual: </label>
+                    <input
+                    type="text"
+                    name="current-balance"
+                    id="current-balance-account"
+                    class="input-money"
+                    autocomplete="off">
+                </div>
+
+                <div class="btn-area">
+                    <!-- Submit -->
+                    <button class="btn-submit" id="btn-submit-config-account">Enviar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reference area -->
         <section class="area reference-1">
+            <!-- Area config -->
+            <div class="config-area" id="btn-config-account">
+                <!-- Config icon -->
+                <span class="config-icon">
+                    <img src="/public/img/icons/config-icon.svg" alt="">
+                </span>
+                <!-- Config label -->
+                <span class="config-label">
+                    <p>Configurações</p>
+                </span>
+            </div>
             <div class="dashboard">
                 <!-- Total to pay -->
                 <div class="dashboard-content">
                     <!-- Title -->
                     <span class="dashboard-content-title to-pay">
-                        <p>Total à pagar: </p>
+                        <p>Total a Pagar: </p>
                     </span>
 
                     <!-- Value -->
                     <span class="dashboard-content-value to-pay">
-                        <p></p>
+                        <p id="value-to-pay-account"></p>
                     </span>
                 </div>
 
@@ -75,12 +132,12 @@
                 <div class="dashboard-content">
                     <!-- Title -->
                     <span class="dashboard-content-title earned">
-                        <p>Total ganho: </p>
+                        <p>Ganhos no mês: </p>
                     </span>
 
                     <!-- Value -->
                     <span class="dashboard-content-value earned">
-                        <p></p>
+                        <p id="value-earnings-account"></p>
                     </span>
                 </div>
 
@@ -93,7 +150,7 @@
 
                     <!-- Value -->
                     <span class="dashboard-content-value balance">
-                        <p></p>
+                        <p id="balance-account"></p>
                     </span>
                 </div>
             </div>
@@ -102,8 +159,10 @@
         <hr>
 
         <!-- Chart -->
-        <section>
-            <!-- Grafico -->
+        <section class="chart-area">
+            <div id="myChart" style="width:100%; max-width:600px; height:500px;">
+
+            </div>
         </section>
     </main>
 
@@ -221,7 +280,7 @@
         </div>
     </footer>
 
-    <script defer src="/public/dist/index.js"></script>
+    <script defer src="/public/dist/report.js"></script>
     <script defer src="/public/dist/chart.js"></script>
 </body>
 </html>

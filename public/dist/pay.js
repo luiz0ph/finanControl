@@ -9,13 +9,6 @@ $(document).ready(() => {
             year: getCurrentDate().year
         }
     };
-    function getCurrentDate() {
-        const today = new Date();
-        const day = today.getDate();
-        const month = today.getMonth();
-        const year = today.getFullYear();
-        return { day, month, year };
-    }
     // Load the tables when the window is reloaded.
     $(window).on('load', () => {
         salary = JSON.parse(localStorage.getItem('salary'));
@@ -38,15 +31,6 @@ $(document).ready(() => {
         else {
             // Alert if the user's device is not compatible with localStorage
             alert('Seu dispositivo não é compativel com o salvamento local');
-        }
-    }
-    class account {
-        constructor(type, value, due, installments, paid) {
-            this.type = type;
-            this.value = value;
-            this.due = due;
-            this.installments = installments;
-            this.paid = paid;
         }
     }
     // Mask input
@@ -307,9 +291,11 @@ $(document).ready(() => {
         let value = parseFloat(saveAccounts[index].value.replace(/\./g, '').replace(',', '.'));
         currentBalance -= value;
         salary.balance = String(currentBalance);
+        salary.balance = currentBalance.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
         const salaryJSON = JSON.stringify(salary);
         localStorage.setItem('salary', salaryJSON);
         save();
+        location.reload();
     });
     $(document).on('click', '.btn-pay-pay', function () {
         saveAccounts = JSON.parse(localStorage.getItem('accounts'));
@@ -320,12 +306,30 @@ $(document).ready(() => {
         let value = parseFloat(saveAccounts[index].value.replace(/\./g, '').replace(',', '.'));
         currentBalance -= value;
         salary.balance = String(currentBalance);
+        salary.balance = currentBalance.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
         const salaryJSON = JSON.stringify(salary);
         localStorage.setItem('salary', salaryJSON);
         save();
+        location.reload();
     });
     function parseDate(dateStr) {
         const [day, month, year] = dateStr.split('/').map(Number);
         return new Date(year, month - 1, day);
+    }
+    function getCurrentDate() {
+        const today = new Date();
+        const day = today.getDate();
+        const month = today.getMonth();
+        const year = today.getFullYear();
+        return { day, month, year };
+    }
+    class account {
+        constructor(type, value, due, installments, paid) {
+            this.type = type;
+            this.value = value;
+            this.due = due;
+            this.installments = installments;
+            this.paid = paid;
+        }
     }
 });

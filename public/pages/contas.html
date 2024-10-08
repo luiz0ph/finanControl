@@ -19,6 +19,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!-- Google Chart -->
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- Mask input -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
     <title>FinanControl</title>
 </head>
@@ -54,6 +58,72 @@
     <main>
         <!-- All accounts -->
         <section class="area accounts">
+            <!-- Modal Config -->
+            <section class="modal" id="modal-edit-account">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <!-- Close modal -->
+                    <span class="close" id="btn-close-edit-account">&times;</span>
+
+                    <!-- Type account -->
+                    <div class="input-area">
+                        <label for="type-edit-account">Tipo da Conta: </label>
+                        <select name="type-edit" id="type-edit-account">
+                            <option value="Luz">Luz</option>
+                            <option value="Água">Água</option>
+                            <option value="Fixo">Conta Fixa</option>
+                            <option value="Pix">Pix</option>
+                            <option value="Compras">Compras</option>
+                        </select>
+                    </div>
+
+                    <!-- Value -->
+                    <div class="input-area">
+                        <label for="value-edit-account">Valor: </label>
+                        <input 
+                        type="text"
+                        name="value-edit"
+                        id="value-edit-account"
+                        class="input-money">
+                    </div>
+
+                    <div class="input-area">
+                        <label for="due-edit-account">Vencimento: </label>
+                        <input 
+                        type="text"
+                        name="due-edit"
+                        id="due-edit-account"
+                        class="fullDate"
+                        placeholder="__/__/____">
+                    </div>
+
+                    <div class="input-area">
+                        <label for="installments-edit-account">Parcelas: </label>
+                        <input 
+                        type="text"
+                        name="installments-edit"
+                        id="installments-edit-account"
+                        class="parcelas">
+                    </div>
+
+                    <div class="input-area">
+                        <label for="paid-edit-account">Pago: </label>
+                        <select name="paid-edit" id="paid-edit-account">
+                            <option value="true">Sim</option>
+                            <option value="false">Não</option>
+                        </select>
+                    </div>
+
+                    <div class="btn-area">
+                        <!-- Submit -->
+                        <button class="btn-submit" id="btn-submit-edit-account">Enviar</button>
+
+                        <!-- Delete -->
+                        <button class="btn-submit" id="btn-delete-account">Deletar</button>
+                    </div>
+                </div>
+            </section>
+
             <!-- Section title -->
             <div class="section-title">
                 <h2>Todas as Contas</h2>
@@ -61,7 +131,7 @@
 
             <!-- Table -->
             <div class="table-area">
-                <table class="account">
+                <table class="account" id="accounts-account">
                     <tr class="table-title-row">
                         <!-- Type -->
                         <th>
@@ -75,7 +145,7 @@
 
                         <!-- Due date -->
                         <th>
-                            Vencimento
+                            Venc
                         </th>
 
                         <!-- Installments -->
@@ -90,7 +160,7 @@
 
                         <!-- Edit -->
                         <th>
-                            Editar
+                            Edit
                         </th>
                     </tr>
                 </table>
@@ -212,6 +282,6 @@
         </div>
     </footer>
 
-    <script defer src="/public/dist/index.js"></script>
+    <script defer src="/public/dist/accounts.js"></script>
 </body>
 </html>

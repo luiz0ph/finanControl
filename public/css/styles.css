@@ -527,12 +527,12 @@ td, th {
     border: 1px solid #000;
 }
 
-.btn-edit {
+.btn-edit, .btn-edit-account {
     all: unset;
     cursor: pointer;
 }
 
-.btn-edit img {
+.btn-edit img, .btn-edit-account img {
     width: 2rem;
     height: 2rem;
 }
@@ -560,6 +560,15 @@ td, th {
 #myChart {
     border-radius: 10px;
     box-shadow: 1px 1px 10px #00000050;
+}
+
+.animation-box, .first-animation-box {
+    opacity: 0;
+    transition: opacity 2s;
+}
+
+.active {
+    opacity: 1;
 }
 
 @media (min-width: 600px) {

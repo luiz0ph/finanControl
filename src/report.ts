@@ -24,7 +24,7 @@ $(document).ready(() => {
         $('body').css('overflow', 'hidden');
     }
 
-    $('#btn-submit-config').on('click', () => {
+    $(document).on('click', $('#btn-submit-config'), function() {
 
         salary.salary = String($('#earnings').val());
         salary.date = Number($('#salary-date').val());
@@ -39,7 +39,7 @@ $(document).ready(() => {
         $('body').css('overflow', 'auto');
     });
 
-    $('#btn-submit-config-report').on('click', () => {
+    $(document).on('click', '#btn-submit-config-report', function() {
 
         salary.salary = String($('#earnings-report').val());
         salary.date = Number($('#salary-date-report').val());
@@ -166,6 +166,7 @@ $(document).ready(() => {
     $('#earnings-account').mask('000.000.000.000.000,00', {reverse: true}); // Mask money
     $('#earnings').mask('000.000.000.000.000,00', {reverse: true}); // Mask money
     $('#current-balance').mask('000.000.000.000.000,00', {reverse: true}); // Mask money
+    $('#current-balance-account').mask('000.000.000.000.000,00', {reverse: true}); // Mask money
     $('#salary-date-account').mask('00'); // Mask date
     $('#salary-date').mask('00'); // Mask date
 

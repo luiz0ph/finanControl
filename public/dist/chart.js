@@ -49,6 +49,6 @@ function drawChart() {
         }
     };
     // Draw
-    const chart = new google.visualization.PieChart($('#myChart'));
+    const chart = new google.visualization.PieChart(document.getElementById('myChart'));
     chart.draw(data, options);
 }

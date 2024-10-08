@@ -194,7 +194,7 @@ $(document).ready(() => {
                             <td style="color: ${color};">${status}</td>
                             <td>
                                 <button class="btn-edit" data-index="${i}">
-                                    <img src="/public/img/icons/config-icon.svg" alt="">
+                                    <img src="../img/icons/config-icon.svg" alt="">
                                 </button>
                             </td>
                         </tr>`)
@@ -256,7 +256,7 @@ $(document).ready(() => {
                             <td style="color: ${color};">${status}</td>
                             <td>
                                 <button class="btn-edit-account" data-index="${i}">
-                                    <img src="/public/img/icons/config-icon.svg" alt="">
+                                    <img src="../img/icons/config-icon.svg" alt="">
                                 </button>
                             </td>
                         </tr>`)

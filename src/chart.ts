@@ -42,9 +42,9 @@ function drawChart() {
         ['Conta Fixa', fixo],
         ['Pix', pix],
         ['Compras', compras]
-      ]);
+        ]);
 
-      const options = {
+        const options = {
         title:'Gastos',
         is3D:true,
         borderRadius: 10,
@@ -52,9 +52,9 @@ function drawChart() {
             fontSize: 20,
             bold: true
         }
-      };
+        };
 
     // Draw
-    const chart = new google.visualization.PieChart($('#myChart'));
+    const chart = new google.visualization.PieChart(document.getElementById('myChart'));
     chart.draw(data, options);
 }

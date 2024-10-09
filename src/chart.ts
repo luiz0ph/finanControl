@@ -13,6 +13,12 @@ function drawChart() {
         let fixo: number = 0;
         let pix: number = 0;
         let compras: number = 0;
+        let internet: number = 0;
+        let cartao: number = 0;
+        let mercado: number = 0;
+        let telefone: number = 0;
+        let aluguel: number = 0;
+        let outros: number = 0;
         for (let i:number = 0; i < saveAccounts.length; i++) {
 
             switch (saveAccounts[i].type) {
@@ -31,6 +37,24 @@ function drawChart() {
                 case 'Compras':
                     compras += Number(saveAccounts[i].value.replace(/\./g, '').replace(',', '.'));
                     break
+                case 'Internet':
+                    internet += Number(saveAccounts[i].value.replace(/\./g, '').replace(',', '.'));
+                    break
+                case 'Cartão':
+                    cartao += Number(saveAccounts[i].value.replace(/\./g, '').replace(',', '.'));
+                    break
+                case 'Mercado':
+                    mercado += Number(saveAccounts[i].value.replace(/\./g, '').replace(',', '.'));
+                    break
+                case 'Telefone':
+                    telefone += Number(saveAccounts[i].value.replace(/\./g, '').replace(',', '.'));
+                    break
+                case 'Aluguel':
+                    aluguel += Number(saveAccounts[i].value.replace(/\./g, '').replace(',', '.'));
+                    break
+                case 'Outro':
+                    outros += Number(saveAccounts[i].value.replace(/\./g, '').replace(',', '.'));
+                    break
                 default:
                     console.error('Error');
             }
@@ -42,7 +66,13 @@ function drawChart() {
             ['Água', agua],
             ['Conta Fixa', fixo],
             ['Pix', pix],
-            ['Compras', compras]
+            ['Compras', compras],
+            ['Internet', internet],
+            ['Cartão', cartao],
+            ['Mercado', mercado],
+            ['Telefone', telefone],
+            ['Aluguel', aluguel],
+            ['Outros', outros],
             ]);
 
             const options = {

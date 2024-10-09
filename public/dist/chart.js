@@ -10,6 +10,12 @@ function drawChart() {
         let fixo = 0;
         let pix = 0;
         let compras = 0;
+        let internet = 0;
+        let cartao = 0;
+        let mercado = 0;
+        let telefone = 0;
+        let aluguel = 0;
+        let outros = 0;
         for (let i = 0; i < saveAccounts.length; i++) {
             switch (saveAccounts[i].type) {
                 case 'Luz':
@@ -27,6 +33,24 @@ function drawChart() {
                 case 'Compras':
                     compras += Number(saveAccounts[i].value.replace(/\./g, '').replace(',', '.'));
                     break;
+                case 'Internet':
+                    internet += Number(saveAccounts[i].value.replace(/\./g, '').replace(',', '.'));
+                    break;
+                case 'Cartão':
+                    cartao += Number(saveAccounts[i].value.replace(/\./g, '').replace(',', '.'));
+                    break;
+                case 'Mercado':
+                    mercado += Number(saveAccounts[i].value.replace(/\./g, '').replace(',', '.'));
+                    break;
+                case 'Telefone':
+                    telefone += Number(saveAccounts[i].value.replace(/\./g, '').replace(',', '.'));
+                    break;
+                case 'Aluguel':
+                    aluguel += Number(saveAccounts[i].value.replace(/\./g, '').replace(',', '.'));
+                    break;
+                case 'Outro':
+                    outros += Number(saveAccounts[i].value.replace(/\./g, '').replace(',', '.'));
+                    break;
                 default:
                     console.error('Error');
             }
@@ -38,7 +62,13 @@ function drawChart() {
             ['Água', agua],
             ['Conta Fixa', fixo],
             ['Pix', pix],
-            ['Compras', compras]
+            ['Compras', compras],
+            ['Internet', internet],
+            ['Cartão', cartao],
+            ['Mercado', mercado],
+            ['Telefone', telefone],
+            ['Aluguel', aluguel],
+            ['Outros', outros],
         ]);
         const options = {
             title: 'Gastos',

@@ -13,7 +13,7 @@ $(document).ready(() => {
 
     // Load the tables when the window is reloaded.
     $(window).on('load', () => {
-        salary = JSON.parse(localStorage.getItem('salary'));
+        salary = JSON.parse(localStorage.getItem('salary')) || salary;
         loadAccounts();
     })
 
@@ -311,8 +311,8 @@ $(document).ready(() => {
 
     // Function to pay the account
     $(document).on('click', '.btn-pay', function() { // Do not replace with an arrow function because it causes an error.
-        saveAccounts = JSON.parse(localStorage.getItem('accounts'));
-        salary = JSON.parse(localStorage.getItem('salary'));
+        saveAccounts = JSON.parse(localStorage.getItem('accounts')) || [];
+        salary = JSON.parse(localStorage.getItem('salary')) || salary;
 
         const index = $(this).data('index');
         saveAccounts[index].paid = true;
